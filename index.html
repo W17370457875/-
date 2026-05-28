@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文件下载中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{max-width:800px;margin:0 auto;padding:20px;font-family:system-ui,-apple-system,sans-serif;}
+        h1{border-bottom:1px solid #eee;padding-bottom:10px;}
+        .file-list{list-style:none;padding:0;}
+        .file-item{padding:12px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;}
+        .file-item:hover{background:#f9f9f9;}
+        a{text-decoration:none;color:#0366d6;}
+        a:hover{text-decoration:underline;}
+        .tip{color:#666;font-size:14px;margin-top:20px;padding:10px;background:#f8f9fa;border-radius:4px;}
+    </style>
+</head>
+<body>
+    <h1>📁 文件下载中心</h1>
+    <ul id="fileList" class="file-list"></ul>
+    <div class="tip">💡 iOS用户点击下载后，在预览页面右上角点击「分享」→「保存到文件」即可下载</div>
+
+    <script>
+        // ===================== 只需要修改下面这3行！=====================
+        const GITHUB_USER = "W17370457875"; // 比如你的GitHub登录名是zhangsan
+        const REPO_NAME = "测试";        // 比如你刚才创建的仓库名是download-files
+        const BRANCH = "main";                // 99%的情况都是main，不用改
+        // ==============================================================
+
+        // 使用jsDelivr全球CDN，解决国内手机访问慢/被拦截的问题
+        const CDN_BASE = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO_NAME}@${BRANCH}`;
+
+        // 自动获取仓库里的所有文件并生成列表
+        fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/`)
+            .then(res => res.json())
+            .then(files => {
+                const list = document.getElementById('fileList');
+                // 过滤掉index.html本身，只显示你上传的文件
+                files.filter(file => file.name !== 'index.html').forEach(file => {
+                    const li = document.createElement('li');
+                    li.className = 'file-item';
+                    
+                    // 兼容所有浏览器的下载链接
+                    const downloadUrl = `${CDN_BASE}/${file.name}`;
+                    
+                    li.innerHTML = `
+                        <span>${file.name}</span>
+                        <a href=" " target="_blank" rel="noopener noreferrer">⬇️ 下载</a >
+                    `;
+                    list.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
