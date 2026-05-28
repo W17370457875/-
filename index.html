@@ -1,55 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文件下载中心</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body{max-width:800px;margin:0 auto;padding:20px;font-family:system-ui,-apple-system,sans-serif;}
-        h1{border-bottom:1px solid #eee;padding-bottom:10px;}
-        .file-list{list-style:none;padding:0;}
-        .file-item{padding:12px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;}
-        .file-item:hover{background:#f9f9f9;}
-        a{text-decoration:none;color:#0366d6;}
-        a:hover{text-decoration:underline;}
-        .tip{color:#666;font-size:14px;margin-top:20px;padding:10px;background:#f8f9fa;border-radius:4px;}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+        body{background:#f7f8fa;padding:20px;}
+        .container{max-width:800px;margin:0 auto;background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+        h1{text-align:center;margin-bottom:24px;color:#222;}
+        h2{margin:20px 0 12px;color:#333;border-left:4px solid #007bff;padding-left:10px;}
+        .file-list{display:flex;flex-direction:column;gap:8px;}
+        .file-item a{display:block;padding:12px 16px;background:#007bff;color:#fff;text-decoration:none;border-radius:8px;text-align:center;transition:0.2s;}
+        .file-item a:hover{background:#0056b3;}
     </style>
 </head>
 <body>
-    <h1>📁 文件下载中心</h1>
-    <ul id="fileList" class="file-list"></ul>
-    <div class="tip">💡 iOS用户点击下载后，在预览页面右上角点击「分享」→「保存到文件」即可下载</div>
 
-    <script>
-        // ===================== 只需要修改下面这3行！=====================
-        const GITHUB_USER = "W17370457875"; // 比如你的GitHub登录名是zhangsan
-        const REPO_NAME = "-";        // 比如你刚才创建的仓库名是download-files
-        const BRANCH = "main";                // 99%的情况都是main，不用改
-        // ==============================================================
+<div class="container">
+    <h1>📥 OpenVPN 配置文件下载</h1>
 
-        // 使用jsDelivr全球CDN，解决国内手机访问慢/被拦截的问题
-        const CDN_BASE = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO_NAME}@${BRANCH}`;
+    <h2>🇨🇳 中国广东省广州市节点（2–15）</h2>
+    <div class="file-list">
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市2.ovpn" download>广州2.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市3.ovpn" download>广州3.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市4.ovpn" download>广州4.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市5.ovpn" download>广州5.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市6.ovpn" download>广州6.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市7.ovpn" download>广州7.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市8.ovpn" download>广州8.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市9.ovpn" download>广州9.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市10.ovpn" download>广州10.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市11.ovpn" download>广州11.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市12.ovpn" download>广州12.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市13.ovpn" download>广州13.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市14.ovpn" download>广州14.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/中国广东省广州市15.ovpn" download>广州15.ovpn</a></div>
+    </div>
 
-        // 自动获取仓库里的所有文件并生成列表
-        fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/`)
-            .then(res => res.json())
-            .then(files => {
-                const list = document.getElementById('fileList');
-                // 过滤掉index.html本身，只显示你上传的文件
-                files.filter(file => file.name !== 'index.html').forEach(file => {
-                    const li = document.createElement('li');
-                    li.className = 'file-item';
-                    
-                    // 兼容所有浏览器的下载链接
-                    const downloadUrl = `${CDN_BASE}/${file.name}`;
-                    
-                    li.innerHTML = `
-                        <span>${file.name}</span>
-                        <a href=" " target="_blank" rel="noopener noreferrer">⬇️ 下载</a >
-                    `;
-                    list.appendChild(li);
-                });
-            });
-    </script>
+    <h2>🇺🇸 美国加利福尼亚圣克拉拉节点（1–15）</h2>
+    <div class="file-list">
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉1.ovpn" download>美国1.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉2.ovpn" download>美国2.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉3.ovpn" download>美国3.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉4.ovpn" download>美国4.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉5.ovpn" download>美国5.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉6.ovpn" download>美国6.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉7.ovpn" download>美国7.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉8.ovpn" download>美国8.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉9.ovpn" download>美国9.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉10.ovpn" download>美国10.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉11.ovpn" download>美国11.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉12.ovpn" download>美国12.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉13.ovpn" download>美国13.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉14.ovpn" download>美国14.ovpn</a></div>
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/美国加利福尼亚圣克拉拉15.ovpn" download>美国15.ovpn</a></div>
+    </div>
+
+    <h2>📘 使用教程</h2>
+    <div class="file-list">
+        <div class="file-item"><a href="https://raw.githubusercontent.com/W17370457875/VPN-/main/使用教程.docx" download>使用教程.docx</a></div>
+    </div>
+</div>
+
 </body>
 </html>
